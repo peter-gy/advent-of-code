@@ -13,7 +13,17 @@ def solve(numbers, target_sum, n):
     print(f'n = {n}, product = {product}')
 
 
+def one_liner(numbers, target_sum, n):
+    from itertools import combinations
+    from math import prod
+    return prod([tpl for tpl in combinations(numbers, n) if sum(tpl) == target_sum][0])
+
+
 if __name__ == '__main__':
     numbers = [int(line) for line in open('input.txt', 'r').readlines()]
+
     solve(numbers, 2020, 2)
     solve(numbers, 2020, 3)
+
+    print(one_liner(numbers, 2020, 2))
+    print(one_liner(numbers, 2020, 3))
