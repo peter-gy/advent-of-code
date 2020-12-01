@@ -1,9 +1,7 @@
+# Pure brute-force. Quick to write, slow to execute. Just Python-stuff... :)
 def n_sum(numbers, target_sum, n):
-    def tuple_has_target_sum(t):
-        return sum(t) == target_sum
-
     from itertools import combinations
-    return list(filter(tuple_has_target_sum, list(combinations(numbers, n))))
+    return [tpl for tpl in combinations(numbers, n) if sum(tpl) == target_sum]
 
 
 def solve(numbers, target_sum, n):
