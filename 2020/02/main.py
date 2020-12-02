@@ -16,13 +16,13 @@ def get_linedata(line):
 
 
 def part1_predicate(line):
-    ld = get_linedata(line)
-    return ld.low <= ld.pwd.count(ld.ch) <= ld.up
+    low, up, ch, pwd = get_linedata(line)
+    return low <= pwd.count(ch) <= up
 
 
 def part2_predicate(line):
-    ld = get_linedata(line)
-    return (ld.pwd[ld.low - 1] == ld.ch) ^ (ld.pwd[ld.up - 1] == ld.ch)
+    low, up, ch, pwd = get_linedata(line)
+    return (pwd[low - 1] == ch) ^ (pwd[up - 1] == ch)
 
 
 if __name__ == '__main__':
