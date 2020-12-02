@@ -1,8 +1,6 @@
 from collections import namedtuple
 import re
 
-count = 0
-
 LineData = namedtuple('LineData', 'low up ch pwd')
 
 
