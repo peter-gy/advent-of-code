@@ -20,7 +20,7 @@ def part1_predicate(line):
 
 def part2_predicate(line):
     low, up, ch, pwd = get_linedata(line)
-    return (pwd[low - 1] == ch) ^ (pwd[up - 1] == ch)
+    return (pwd[low - 1] == ch) + (pwd[up - 1] == ch) == 1  # alternative xor instead of ^
 
 
 if __name__ == '__main__':
