@@ -17,10 +17,12 @@ regexes = {
     'pid': r'^[0-9]{9}$'
 }
 
+ignored = ['cid']
+
 
 def parse_passport_to_dict(passport):
     pairs = [tuple(pair.split(':')) for pair in re.split(r' |\n', passport)]
-    return {key: value for (key, value) in pairs if key != 'cid'}
+    return {key: value for (key, value) in pairs if key not in ignored}
 
 
 def required_keys_are_present(passport):
