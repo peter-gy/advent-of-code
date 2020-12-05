@@ -1,27 +1,23 @@
-def bisect(pattern, low_symbol, high_symbol):
-    low, high = (0, 2 ** len(pattern) - 1)
-    for symbol in pattern:
-        mid = (low + high) // 2
-        if symbol == low_symbol:
-            high = mid
-        elif symbol == high_symbol:
-            low = mid + 1
-        else:
-            raise RuntimeError(f'Unexpected symbol: {symbol}')
-
-    if low != high:
-        raise RuntimeError(f'Bisection failed. Low: {low}, High: {high}')
-
-    return low
-
+from functools import reduce
 
 ROW_PATTERN_LENGTH = 7
+row_symbol_to_binary_dict = {
+    'F': '0',
+    'B': '1'
+}
+
+col_symbol_to_binary_dict = {
+    'L': '0',
+    'R': '1'
+}
 
 
 def get_seat_id(line):
     row_pattern = line[:ROW_PATTERN_LENGTH]
     col_pattern = line[ROW_PATTERN_LENGTH:]
-    return bisect(row_pattern, 'F', 'B') * 8 + bisect(col_pattern, 'L', 'R')
+    row_binary_str = reduce(lambda acc, ch: acc.replace(ch, row_symbol_to_binary_dict[ch]), row_pattern, row_pattern)
+    col_binary_str = reduce(lambda acc, ch: acc.replace(ch, col_symbol_to_binary_dict[ch]), col_pattern, col_pattern)
+    return int(row_binary_str, 2) * 8 + int(col_binary_str, 2)
 
 
 def get_sorted_seat_ids(lines):
