@@ -24,23 +24,19 @@ def get_seat_id(line):
     return bisect(row_pattern, 'F', 'B') * 8 + bisect(col_pattern, 'L', 'R')
 
 
-def get_seat_ids(lines):
-    return [get_seat_id(line) for line in lines]
+def get_sorted_seat_ids(lines):
+    return sorted([get_seat_id(line) for line in lines])
 
 
 def part_1(lines):
-    return max(get_seat_ids(lines))
+    return get_sorted_seat_ids(lines)[-1]
 
 
 def part_2(lines):
-    ids = get_seat_ids(lines)
-    ids.sort()
-    prev, *tail = ids
-    for id in tail:
-        if id != prev + 1:
-            break
-        prev = id
-    return id - 1
+    ids = get_sorted_seat_ids(lines)
+    expected_sum = sum(range(ids[0], ids[-1] + 1))
+    actual_sum = sum(ids)
+    return expected_sum - actual_sum
 
 
 if __name__ == '__main__':
